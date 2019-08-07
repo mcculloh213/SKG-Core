@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- region Default WearHF Directives -->
+
+    <!-- HF Override: Any text found in content description that is not a WearHF directive will be used for the speech command for the element. -->
+    <string name="hf_override" translatable="false">hf_override</string>
+
+    <!-- HF Commands: Specifies a number of voice commands, separated by commas. -->
+    <string name="hf_commands" translatable="false" formatted="true">hf_commands:%1$s</string>
+
+    <!-- HF WearML Override: Specifies a WearML script to use for view. -->
+    <string name="hf_wearml_override" formatted="true">hf_wearml_override \| %1$s</string>
+
+    <!-- HF No Overlay: Disabled the overlay. -->
+    <string name="hf_no_overlay" translatable="false">hf_no_overlay</string>
+
+    <!-- HF Overlay Number: Specifies that a persistent numeric index should be displayed in the center of the element. -->
+    <string name="hf_overlay_number" translatable="false">hf_overlay_number</string>
+
+    <!-- HF No Number: Turn off numeric indexing and text overlays (i.e. Select item X…). -->
+    <string name="hf_no_number" translatable="false">hf_no_number</string>
+
+    <!-- HF Yes Number: Turn on numeric indexing and text overlays. -->
+    <string name="hf_yes_number" translatable="false">hf_yes_number</string>
+
+    <!-- HF Show Text: Specifies that text overlays should be displayed. -->
+    <string name="hf_show_text" translatable="false">hf_show_text</string>
+
+    <!-- HF Persists: Specifies that numeric indexing overlay or text overlay should always be displayed. -->
+    <string name="hf_persists" translatable="false">hf_persists</string>
+
+    <!-- HF Orientation: Specifies the orientation of the text overlay relative to the numeric index overlay. One of {} -->
+    <string name="hf_orientation" translatable="false" formatted="true">hf_orientation:%1$s</string>
+
+    <!-- HF Show Dot: Specifies that an overlay dot should be displayed to indicate a voice command. -->
+    <string name="hf_show_dot" translatable="false">hf_show_dot</string>
+
+    <!-- HF Show Icon: Specifies that an microphone overlay icon should be displayed next to the text overlay to indicate a voice command. -->
+    <string name="hf_show_icon" translatable="false">hf_show_icon</string>
+
+    <!-- HF Background Color: Specifies background color of the overlay. -->
+    <string name="hf_background_color" translatable="false">hf_background_color</string>
+
+    <!-- HF Text Color: Specifies text color for the overlay. -->
+    <string name="hf_text_color" translatable="false">hf_text_color</string>
+
+    <!-- HF Use Text: Specify that an element should use the android:text field contents for its speech recognizer command. This is used to override the default behaviour of auto selecting between the android:text and android:contentDescription fields. Normally android:contentDescription takes precedence over android:text. -->
+    <string name="hf_use_text" translatable="false">hf_use_text</string>
+
+    <!-- HF Use Description: Specifies that the element should use the android:description field contents for its speech recogniser command. -->
+    <string name="hf_use_description" translatable="false">hf_use_description</string>
+
+    <!--&lt;!&ndash; HF Hide Help: Hides the “Show Help” icon. &ndash;&gt;-->
+    <!--<string name=""></string>-->
+
+    <!--&lt;!&ndash; HF Text Normal: Characterises a text-field to tell WearHF present a virtual keyboard allowing the user to enter some text by selecting characters. This is the default behaviour for text fields. &ndash;&gt;-->
+    <!--<string name=""></string>-->
+
+    <!--&lt;!&ndash; HF Text Dictation: Characterises a text-field to tell WearHF present a dictation keyboard allowing the user to enter some text by freely speaking text in sentences. &ndash;&gt;-->
+    <!--<string name=""></string>-->
+
+    <!--&lt;!&ndash; &ndash;&gt;-->
+    <!--<string name=""></string>-->
+
+    <!-- HF Scroll None: Turn off head-tracked scrolling for the view. -->
+    <string name="hf_scroll_none" translatable="false">hf_scroll_none</string>
+
+    <!-- HF Scroll Horizontal: Specifies that horizontal head-tracked scrolling should be turned on the the view, and the scrolling activity should be directed at the current UI element. -->
+    <string name="hf_scroll_horizontal">hf_scroll_horizontal</string>
+
+    <!-- HF Scroll Vertical: Specifies that vertical head-tracked scrolling should be turned on the this view, and the scrolling activity should be directed at the current UI element. This is the default scroll setting if a scrollable element is discovered in the UI tree. -->
+    <string name="hf_scroll_vertical">hf_scroll_vertical</string>
+
+    <!--&lt;!&ndash; &ndash;&gt;-->
+    <!--<string name=""></string>-->
+
+    <!--&lt;!&ndash; &ndash;&gt;-->
+    <!--<string name=""></string>-->
+
+    <!--&lt;!&ndash; &ndash;&gt;-->
+    <!--<string name=""></string>-->
+
+    <!--&lt;!&ndash; &ndash;&gt;-->
+    <!--<string name=""></string>-->
+
+    <!-- endregion -->
+</resources>

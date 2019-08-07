@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout style="@style/Container.Fit"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/application_root"
+    android:fitsSystemWindows="true"
+    tools:context=".contract.BaseModule">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout style="@style/Container.Fit"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <com.google.android.material.appbar.AppBarLayout style="@style/Widget.Core.ActionBar">
+            <androidx.appcompat.widget.Toolbar style="@style/Widget.Core.Toolbar"
+                android:id="@+id/toolbar">
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout style="@style/Container.Wrap"
+            android:id="@+id/fab_menu_container"
+            android:layout_marginTop="@dimen/layout_margin_xxlarge"
+            android:layout_marginEnd="@dimen/layout_margin_large"
+            android:elevation="@dimen/layout_elevation_medium"
+            app:layout_anchor="@id/content_container"
+            app:layout_anchorGravity="top|end"/>
+
+        <FrameLayout style="@style/Container.Fit"
+            android:id="@+id/content_container"
+            android:layout_marginTop="?attr/actionBarSize"/>
+
+        <include layout="@layout/layout_loading_dialog" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <FrameLayout style="@style/Container.Core.ActivityDrawer.End"
+        android:id="@+id/drawer_container"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- region Default Text Sizing -->
+    <dimen name="text_size_default">12sp</dimen>
+    <dimen name="text_size_fab_long">13sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_xlarge">36sp</dimen>
+    <!-- endregion -->
+
+    <!-- region Padding Definitions -->
+    <dimen name="layout_padding_xsmall">2dp</dimen>
+    <dimen name="layout_padding_small">4dp</dimen>
+    <dimen name="layout_padding_medium">8dp</dimen>
+    <dimen name="layout_padding_large">16dp</dimen>
+    <dimen name="layout_padding_xlarge">32dp</dimen>
+    <!-- endregion -->
+
+    <!-- region Margin Definitions -->
+    <dimen name="layout_margin_xsmall">2dp</dimen>
+    <dimen name="layout_margin_small">4dp</dimen>
+    <dimen name="layout_margin_medium">8dp</dimen>
+    <dimen name="layout_margin_large">16dp</dimen>
+    <dimen name="layout_margin_xlarge">32dp</dimen>
+    <dimen name="layout_margin_xxlarge">64dp</dimen>
+    <!-- endregion -->
+
+    <!-- region Elevation Definitions -->
+    <dimen name="layout_elevation_small">4dp</dimen>
+    <dimen name="layout_elevation_medium">8dp</dimen>
+    <dimen name="layout_elevation_large">16dp</dimen>
+    <!-- endregion -->
+
+    <!-- region Material: Corner Radius -->
+    <dimen name="corner_radius_shallow">4dp</dimen>
+    <dimen name="corner_radius_medium">8dp</dimen>
+    <dimen name="corner_radius_deep">12dp</dimen>
+    <!-- endregion -->
+
+    <!-- region Misc. -->
+    <dimen name="zero_dp">0dp</dimen>
+    <dimen name="zero_sp">0sp</dimen>
+    <!-- endregion -->
+</resources>

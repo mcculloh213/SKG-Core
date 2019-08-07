@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Container"/>
+    <style name="Container.Wrap" parent="Container">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="Container.Fit" parent="Container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <style name="Container.Flex" parent="Container">
+        <item name="android:layout_width">@dimen/zero_dp</item>
+        <item name="android:layout_height">@dimen/zero_dp</item>
+    </style>
+    <style name="Container.Core.ActivityDrawer" parent="Container.Fit">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+    <style name="Container.Core.ActivityDrawer.Left" parent="Container.Core.ActivityDrawer">
+        <item name="android:layout_gravity">left</item>
+    </style>
+    <style name="Container.Core.ActivityDrawer.Start" parent="Container.Core.ActivityDrawer">
+        <item name="android:layout_gravity">start</item>
+    </style>
+    <style name="Container.Core.ActivityDrawer.Top" parent="Container.Core.ActivityDrawer">
+        <item name="android:layout_gravity">top</item>
+    </style>
+    <style name="Container.Core.ActivityDrawer.Right" parent="Container.Core.ActivityDrawer">
+        <item name="android:layout_gravity">start</item>
+    </style>
+    <style name="Container.Core.ActivityDrawer.End" parent="Container.Core.ActivityDrawer">
+        <item name="android:layout_gravity">end</item>
+    </style>
+    <style name="Container.Core.ActivityDrawer.Bottom" parent="Container.Core.ActivityDrawer">
+        <item name="android:layout_gravity">end</item>
+    </style>
+    <style name="Container.Core.Backdrop" parent="Container.Fit">
+        <item name="android:background">@color/dorado</item>
+    </style>
+    <style name="Container.ProgressBar" parent="Container.Wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_marginStart">@dimen/layout_margin_large</item>
+        <item name="android:layout_marginEnd">@dimen/layout_margin_large</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">@dimen/layout_padding_small</item>
+        <item name="android:elevation">@dimen/layout_elevation_large</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:background">@drawable/bg_progress_bar_container</item>
+    </style>
+</resources>

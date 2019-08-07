@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cerulean">#00b0d8</color>
+    <color name="malibu">#62e2ff</color>
+    <color name="deep_cerulean">#0080a6</color>
+    <color name="mine_shaft">#282828</color>
+    <color name="dorado">#505050</color>
+    <color name="black">#000000</color>
+    <color name="my_sin">#ffb726</color>
+    <color name="candy_corn">#ffe95d</color>
+    <color name="pirate_gold">#c78700</color>
+
+    <color name="white">#ffffff</color>
+    <color name="old_lace">#fcf1e5</color>
+    <color name="bridal_heath">#fffbf3</color>
+    <color name="dawn">#a5a19c</color>
+    <color name="mine_shaft_alpha_80">#cc282828</color>
+    <color name="shiraz">#b00020</color>
+
+    <color name="guardsman_red">#d10000</color>
+    <color name="orange">#ff6622</color>
+    <color name="candlelight">#ffda21</color>
+    <color name="harlequin">#33dd00</color>
+    <color name="persian_blue">#1133cc</color>
+    <color name="paua">#220066</color>
+    <color name="ripe_plum">#330044</color>
+</resources>

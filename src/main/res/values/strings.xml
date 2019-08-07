@@ -1,0 +1,6 @@
+<resources>
+    <string name="menu_search" translatable="false">Search</string>
+    <string name="menu_home" translatable="false">Home</string>
+    <string name="hf_menu_search" translatable="false">hf_no_number|hf_show_icon|Search</string>
+    <string name="hf_menu_home" translatable="false">hf_no_number|hf_show_icon|Home</string>
+</resources>

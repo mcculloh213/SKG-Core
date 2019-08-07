@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.Core.ActionBar" parent="Widget.Design.AppBarLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:theme">@style/Theme.Core.AppBarOverlay</item>
+    </style>
+    <style name="Widget.Core.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/cerulean</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorPrimaryInverse">@color/black</item>
+        <item name="android:textColorSecondary">?android:attr/textColorPrimary</item>
+        <item name="actionMenuTextColor">?android:attr/textColorPrimary</item>
+        <item name="android:theme">@style/Theme.Core.AppBarOverlay</item>
+        <item name="android:popupTheme">@style/Theme.Core.PopupOverlay</item>
+    </style>
+    <style name="Widget.Core.ProgressBar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">@dimen/layout_margin_small</item>
+    </style>
+    <style name="Widget.Core.ProgressBar.Text" parent="Container.Fit">
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.Core.Headline6</item>
+    </style>
+</resources>

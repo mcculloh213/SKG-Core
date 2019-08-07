@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="androidx.coordinatorlayout.widget.CoordinatorLayout">
+    <FrameLayout style="@style/Container.ProgressBar"
+        android:id="@+id/loading_dialog_container"
+        android:visibility="gone"
+        tools:visibility="visible">
+        <ProgressBar style="@style/Widget.Core.ProgressBar"
+            android:id="@+id/loading_spinner"/>
+        <TextView style="@style/Widget.Core.ProgressBar.Text"
+            android:id="@+id/loading_dialog_text"
+            tools:text="Loading..."/>
+    </FrameLayout>
+</merge>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Core" parent="Theme.MaterialComponents.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="android:colorPrimary">@color/cerulean</item>
+        <item name="colorPrimary">@color/cerulean</item>
+        <item name="colorPrimaryVariant">@color/deep_cerulean</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/my_sin</item>
+        <item name="android:colorAccent">@color/my_sin</item>
+        <item name="colorAccent">@color/my_sin</item>
+        <item name="colorSecondaryVariant">@color/candy_corn</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorError">@color/shiraz</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/mine_shaft</item>
+        <item name="android:colorBackground">@color/bridal_heath</item>
+        <item name="colorOnBackground">@color/mine_shaft</item>
+
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:navigationBarColor">@color/dawn</item>
+        <item name="android:statusBarColor">@color/dorado</item>
+    </style>
+    <style name="Theme.Core.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar"/>
+    <style name="Theme.Core.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
+</resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SlotView">
+        <attr name="slots" format="integer|reference" />
+        <attr name="level_drawable" format="integer|reference" />
+        <attr name="default_zoom_level" format="enum">
+            <enum name="zero"  value="0" />
+            <enum name="one"   value="1" />
+            <enum name="two"   value="2" />
+            <enum name="three" value="3" />
+            <enum name="four"  value="4" />
+            <enum name="five"  value="5" />
+            <enum name="six"   value="6" />
+            <enum name="seven" value="7" />
+            <enum name="eight" value="8" />
+            <enum name="nine"  value="9" />
+            <enum name="ten"   value="10" />
+        </attr>
+        <attr name="min_zoom_level" format="enum">
+            <enum name="zero"  value="0" />
+            <enum name="one"   value="1" />
+            <enum name="two"   value="2" />
+            <enum name="three" value="3" />
+            <enum name="four"  value="4" />
+            <enum name="five"  value="5" />
+            <enum name="six"   value="6" />
+            <enum name="seven" value="7" />
+            <enum name="eight" value="8" />
+            <enum name="nine"  value="9" />
+            <enum name="ten"   value="10" />
+        </attr>
+        <attr name="max_zoom_level" format="enum|reference">
+            <enum name="zero"  value="0" />
+            <enum name="one"   value="1" />
+            <enum name="two"   value="2" />
+            <enum name="three" value="3" />
+            <enum name="four"  value="4" />
+            <enum name="five"  value="5" />
+            <enum name="six"   value="6" />
+            <enum name="seven" value="7" />
+            <enum name="eight" value="8" />
+            <enum name="nine"  value="9" />
+            <enum name="ten"   value="10" />
+        </attr>
+    </declare-styleable>
+</resources>
