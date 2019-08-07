@@ -187,7 +187,7 @@ class SlotView @JvmOverloads constructor(
         override fun onClick(view: View?) {
             Log.d("SlotView", "Index: $idx")
             setCurrentZoomLevel(zoomFromInt(idx+1))
-            listener?.onClickSlot(idx)
+            listener?.onClickSlot(idx+1)
         }
     }
 }

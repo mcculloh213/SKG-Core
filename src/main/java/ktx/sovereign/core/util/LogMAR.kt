@@ -14,7 +14,7 @@ import kotlin.math.pow
  * @param infimum       The lower bound
  * @param supremum      The upper bound
  */
-class LogMAR(
+class LogMAR @JvmOverloads constructor(
     private val defaultSize: Float,
     private val infimum: Float = ZERO,
     private val supremum: Float = 1.5f
@@ -30,10 +30,12 @@ class LogMAR(
     val scale: Float
         get() = defaultSize * TEN.pow(_exp)
 
+    @JvmOverloads
     fun stepUp(multiplier: Int = 1): Float {
         _exp = min(supremum, _exp + (STEP * multiplier))
         return scale
     }
+    @JvmOverloads
     fun stepDown(multiplier: Int = 1): Float {
         _exp = max(infimum, _exp - (STEP * multiplier))
         return scale
