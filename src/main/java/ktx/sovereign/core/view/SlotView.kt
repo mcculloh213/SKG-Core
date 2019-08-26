@@ -57,9 +57,9 @@ class SlotView @JvmOverloads constructor(
         slots = a.getInt(R.styleable.SlotView_slots, DEFAULT_SLOTS)
         filledSlot = ResourcesCompat.getDrawable(resources, R.drawable.sh_circle_filled, context.theme)!!
         emptySlot = ResourcesCompat.getDrawable(resources, R.drawable.sh_circle_empty, context.theme)!!
-        currentZoom = zoomFromInt(a.getInt(R.styleable.SlotView_default_zoom_level, DEFAULT_ZOOM_LEVEL.value))
-        minZoomLevel = zoomFromInt(a.getInt(R.styleable.SlotView_min_zoom_level, DEFAULT_MIN_ZOOM.value))
-        maxZoomLevel = zoomFromInt(a.getInt(R.styleable.SlotView_max_zoom_level, DEFAULT_MAX_ZOOM.value))
+        currentZoom = zoomFromInt(a.getInt(R.styleable.SlotView_default_slot_level, DEFAULT_ZOOM_LEVEL.value))
+        minZoomLevel = zoomFromInt(a.getInt(R.styleable.SlotView_min_slot_level, DEFAULT_MIN_ZOOM.value))
+        maxZoomLevel = zoomFromInt(a.getInt(R.styleable.SlotView_max_slot_level, DEFAULT_MAX_ZOOM.value))
         a.recycle()
         weightSum = slots.toFloat()
         isSaveEnabled = true
