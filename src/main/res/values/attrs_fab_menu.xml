@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FloatingActionButtonMenu">
+        <attr name="menuColorPressed" format="color|reference"/>
+        <attr name="menuColorNormal" format="color|reference"/>
+        <attr name="menuSize" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="mini" value="1"/>
+        </attr>
+        <attr name="expandDirection" format="enum">
+            <enum name="up"     value="0"/>
+            <enum name="down"   value="1"/>
+            <enum name="left"   value="2"/>
+            <enum name="start"  value="2"/>
+            <enum name="right"  value="3"/>
+            <enum name="end"    value="3"/>
+        </attr>
+        <attr name="labelPosition" format="enum">
+            <enum name="none"   value="-1"/>
+            <enum name="top"    value="0"/>
+            <enum name="above"  value="0"/>
+            <enum name="bottom" value="1"/>
+            <enum name="below"  value="1"/>
+            <enum name="left"   value="2"/>
+            <enum name="start"  value="2"/>
+            <enum name="right"  value="3"/>
+            <enum name="end"    value="3"/>
+        </attr>
+    </declare-styleable>
+</resources>

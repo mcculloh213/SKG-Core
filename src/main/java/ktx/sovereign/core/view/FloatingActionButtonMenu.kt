@@ -5,7 +5,9 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Rect
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import android.view.animation.OvershootInterpolator
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
+import androidx.core.view.children
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ktx.sovereign.core.R
@@ -27,19 +30,33 @@ class FloatingActionButtonMenu @JvmOverloads constructor(
         private val ExpandInterpolator: Interpolator = OvershootInterpolator()
         private val CollapseInterpolator: Interpolator = DecelerateInterpolator(3f)
         private val AlphaExpandInterpolator: Interpolator = DecelerateInterpolator()
+
+        @JvmStatic private fun runOnHVExpandDirection(
+            direction: ExpandDirection,
+            onVertical: (() -> Unit)? = null,
+            onHorizontal: (() -> Unit)? = null
+        ) = when (direction) {
+            ExpandDirection.UP, ExpandDirection.DOWN -> {
+                onVertical?.invoke() ?: Unit
+            }
+            ExpandDirection.START, ExpandDirection.LEFT,
+            ExpandDirection.END, ExpandDirection.RIGHT -> {
+                onHorizontal?.invoke() ?: Unit
+            }
+        }
     }
     enum class ExpandDirection {
-        NORTH, UP,      // 0
-        EAST, RIGHT,    // 1
-        SOUTH, DOWN,    // 2
-        WEST, LEFT      // 3
+        UP,             // 0
+        DOWN,           // 1
+        LEFT,   START,  // 2
+        RIGHT,  END,    // 3
     }
     enum class LabelPlacement {
         NONE,           // -1
-        TOP, ABOVE,     // 0
-        END, TO_RIGHT,  // 1
-        BOTTOM, BELOW,  // 2
-        START, TO_LEFT  // 3
+        TOP,    ABOVE,  // 0
+        BOTTOM, BELOW,  // 1
+        START,  LEFT,   // 2
+        END,    RIGHT   // 3
     }
 
     private val avdMenuToClose: AnimatedVectorDrawableCompat? =
@@ -51,21 +68,20 @@ class FloatingActionButtonMenu @JvmOverloads constructor(
     private val menu: FloatingActionButton = FloatingActionButton(context, attrs, defStyleAttr)
     private val enableLabels: Boolean = true
     private val direction: ExpandDirection = ExpandDirection.DOWN
-    private val placement: LabelPlacement = LabelPlacement.TO_LEFT
+    private val placement: LabelPlacement = LabelPlacement.LEFT
+    private val containerRect: Rect = Rect()
+    private val childRect: Rect = Rect()
 
     private val itemSpacing = resources.getDimension(R.dimen.layout_margin_small)
     private val labelMargin = resources.getDimensionPixelSize(R.dimen.layout_margin_medium)
     private val labelVerticalOffset = resources.getDimensionPixelSize(R.dimen.layout_margin_xsmall)
-
 
     private var maxWidth: Int = 0
     private var maxHeight: Int = 0
     private var itemCount: Int = 1
 
     var expanded: Boolean = false
-        private set(value) {
-            field = value
-        }
+        private set
 
     init {
         menu.apply {
@@ -84,159 +100,135 @@ class FloatingActionButtonMenu @JvmOverloads constructor(
                 toggle()
             }
             setTag(R.id.metadata_label, "Menu")
+            visibility = View.VISIBLE
         }
-        addView(menu, generateDefaultLayoutParams())
-    }
-
-    fun addButton(@IdRes idRes: Int, @DrawableRes iconRes: Int, label: String, onClick: (() -> Unit)? = null) {
-        val add = FloatingActionButton(context).apply {
-            id = idRes
-            size = FloatingActionButton.SIZE_MINI
-            contentDescription = "hf_no_number|hf_show_text|$label"
-            setImageResource(iconRes)
-            layoutParams = generateDefaultLayoutParams()
-            setTag(R.id.metadata_label, label)
-            setOnClickListener { onClick?.invoke() }
-        }
-        addView(add, itemCount - 1)
-        itemCount++
-
-//        if (enableLabels) {
-//            createLabels()
-//        }
+        addView(menu, 0, generateDefaultLayoutParams())
+        itemCount = childCount
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        measureChildren(widthMeasureSpec, heightMeasureSpec)
         var width = 0
         var height = 0
+        var childState = 0
 
         maxWidth = 0
         maxHeight = 0
         var maxLabelWidth = 0
-
-        for (i in 0..itemCount) {
+        for (i in 0 until childCount) {
             val child = getChildAt(i)
-            if (child == null || child.visibility == GONE) continue
-            when (direction) {
-                ExpandDirection.NORTH, ExpandDirection.SOUTH,
-                ExpandDirection.UP, ExpandDirection.DOWN -> {
-                    maxWidth = max(maxWidth, child.measuredWidth)
-                    height += child.measuredHeight
+            if (child.visibility != View.GONE) {
+                measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0)
+                val params = if (checkLayoutParams(child.layoutParams)) {
+                    child.layoutParams
+                } else {
+                    val p = generateLayoutParams(child.layoutParams)
+                    child.layoutParams = p
+                    p
                 }
-                ExpandDirection.EAST, ExpandDirection.WEST,
-                ExpandDirection.RIGHT, ExpandDirection.LEFT -> {
-                    width += child.measuredWidth
-                    maxHeight = max(maxHeight, child.measuredHeight)
+                when (direction) {
+                    ExpandDirection.UP, ExpandDirection.DOWN -> {
+                        maxWidth = max(maxWidth, child.measuredWidth)
+                        height += child.measuredHeight
+                    }
+                    ExpandDirection.START, ExpandDirection.LEFT,
+                    ExpandDirection.END, ExpandDirection.RIGHT -> {
+                        width += child.measuredWidth
+                        maxHeight = max(maxHeight, child.measuredHeight)
+                    }
                 }
+                childState = View.combineMeasuredStates(childState, child.measuredState)
             }
 
             if (!isHorizontal()) {
-                val label = child.getTag(R.id.fab_menu_label) as TextView?
-                if (label != null) {
-                    maxLabelWidth = max(maxLabelWidth, label.measuredWidth)
+                width = max(maxWidth, suggestedMinimumWidth)
+            } else {
+                height = max(maxHeight, suggestedMinimumHeight)
+            }
+
+            runOnHVExpandDirection(direction,
+                onVertical = {
+                    height += (itemSpacing * (itemCount - 1)).toInt()
+                    height = adjustForOvershoot(height)
+                },
+                onHorizontal = {
+                    width += (itemSpacing * (itemCount - 1)).toInt()
+                    width = adjustForOvershoot(width)
                 }
-            }
-        }
+            )
 
-        if (!isHorizontal()) {
-            width = maxWidth + (if (maxLabelWidth > 0) (maxLabelWidth + labelMargin) else 0)
-        } else {
-            height = maxHeight
+            setMeasuredDimension(
+                View.resolveSizeAndState(width, widthMeasureSpec, childState),
+                View.resolveSizeAndState(height, heightMeasureSpec,
+                    childState shl View.MEASURED_HEIGHT_STATE_SHIFT
+                )
+            )
         }
-
-        when (direction) {
-            ExpandDirection.NORTH, ExpandDirection.SOUTH,
-            ExpandDirection.UP, ExpandDirection.DOWN -> {
-                height += (itemSpacing * (itemCount - 1)).toInt()
-                height = adjustForOvershoot(height)
-            }
-            ExpandDirection.EAST, ExpandDirection.WEST,
-            ExpandDirection.RIGHT, ExpandDirection.LEFT -> {
-                width += (itemSpacing * (itemCount - 1)).toInt()
-                width = adjustForOvershoot(width)
-            }
-        }
-
-        setMeasuredDimension(width, height)
     }
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        when (direction) {
-            ExpandDirection.NORTH, ExpandDirection.SOUTH,
-            ExpandDirection.UP, ExpandDirection.DOWN -> {
-                val isUp = direction in arrayOf(ExpandDirection.NORTH, ExpandDirection.UP)
-                val posLeft = placement in arrayOf(LabelPlacement.START, LabelPlacement.TO_LEFT)
+        runOnHVExpandDirection(direction,
+            onVertical = {
+                val isUp = direction == ExpandDirection.UP
 
-                val menuY = if (isUp) (b - t - menu.measuredHeight) else 0
-                val horizCenter = if (posLeft) (r - 1 - (maxWidth / 2)) else (maxWidth / 2)
-                val menuLeft = horizCenter - (menu.measuredWidth / 2)
+                val menuY = if (isUp) {
+                    b - t - menu.measuredHeight
+                } else {
+                    0
+                }
+                val centerX = measuredWidth / 2
+                val menuLeft = centerX - (menu.measuredWidth / 2)
 
                 menu.layout(menuLeft, menuY, menuLeft + menu.measuredWidth, menuY + menu.measuredHeight)
 
-                val labelOffset = (maxWidth / 2) + labelMargin
-                val labelX = if (posLeft) {
-                    horizCenter - labelOffset
-                } else {
-                    horizCenter + labelOffset
-                }
                 var nextY = if (isUp) {
                     menuY - itemSpacing
                 } else {
                     menuY + menu.measuredHeight + itemSpacing
                 }.toInt()
-
-                for (i in 0..itemCount) { // (itemCount - 1) downTo 0) {
-                    val child = getChildAt(i)
-                    if (child == null || child == menu || child.visibility == GONE) continue
-                    val childX = horizCenter - (child.measuredWidth / 2)
-                    val childY = if (isUp) (nextY - child.measuredHeight) else nextY
+                for (i in 0 until childCount) {
+                    val child = getChildAt(i) ?: continue
+                    if (child == menu || child.visibility == GONE) continue
+                    val childX = centerX - (child.measuredWidth / 2)
+                    val childY = if (isUp) {
+                        nextY - child.measuredHeight
+                    } else {
+                        nextY
+                    }
                     child.layout(childX, childY, childX + child.measuredWidth, childY + child.measuredHeight)
 
-                    val collapsedTranslation = (menuY - childY).toFloat()
+                    val collapsedTransition = (menuY - childY).toFloat()
                     val expandedTranslation = 0f
 
-                    child.translationY = if (expanded) expandedTranslation else collapsedTranslation
-                    child.alpha = if (expanded) 1f else 0f
+                    child.translationY = if (expanded) {
+                        expandedTranslation
+                    } else {
+                        collapsedTransition
+                    }
+                    child.alpha = if (expanded) {
+                        1f
+                    } else {
+                        0f
+                    }
 
                     val params = child.layoutParams as LayoutParams
                     params.apply {
-                        setFloatValues(expandedTranslation, collapsedTranslation)
+                        setFloatValues(expandedTranslation, collapsedTransition)
                         setAnimationsTarget(child)
                     }
-                    (child.getTag(R.id.fab_menu_label) as View?)?.let {
-                        val awayX = if (posLeft) (labelX - it.measuredWidth) else labelX + it.measuredWidth
-                        val left = if (posLeft) awayX else labelX
-                        val right = if (posLeft) labelX else  awayX
-                        val top = childY - labelVerticalOffset + ((child.measuredHeight - it.measuredHeight) / 2)
 
-                        it.layout(left, top, right, top + it.measuredHeight)
-                        it.translationY = if (expanded) expandedTranslation else collapsedTranslation
-                        it.alpha = if (expanded) 1f else 0f
-                        val labelParams = it.layoutParams as LayoutParams
-                        labelParams.setFloatValues(expandedTranslation, collapsedTranslation)
-                        labelParams.setAnimationsTarget(it)
-                    }
                     nextY = if (isUp) {
                         childY - itemSpacing
                     } else {
                         childY + child.measuredHeight + itemSpacing
                     }.toInt()
                 }
-            }
-            ExpandDirection.EAST, ExpandDirection.WEST,
-            ExpandDirection.RIGHT, ExpandDirection.LEFT -> {
-
-            }
-        }
+            })
     }
     override fun onFinishInflate() {
         super.onFinishInflate()
         bringChildToFront(menu)
+        requestLayout()
+        invalidate()
         itemCount = childCount
-
-//        if (enableLabels) {
-//            createLabels()
-//        }
     }
 
     override fun generateDefaultLayoutParams(): ViewGroup.LayoutParams {
@@ -247,6 +239,9 @@ class FloatingActionButtonMenu @JvmOverloads constructor(
     }
     override fun generateLayoutParams(p: ViewGroup.LayoutParams?): ViewGroup.LayoutParams {
         return LayoutParams(super.generateLayoutParams(p))
+    }
+    override fun checkLayoutParams(p: ViewGroup.LayoutParams?): Boolean {
+        return p is LayoutParams
     }
 
     fun toggle() {
@@ -274,12 +269,10 @@ class FloatingActionButtonMenu @JvmOverloads constructor(
 
     private fun adjustForOvershoot(dimension: Int) = dimension * 12 / 10
     private fun isHorizontal(): Boolean = direction in arrayOf(
-        ExpandDirection.EAST, ExpandDirection.RIGHT,
-        ExpandDirection.WEST, ExpandDirection.LEFT
+        ExpandDirection.START, ExpandDirection.RIGHT,
+        ExpandDirection.END, ExpandDirection.LEFT
     )
-    private fun expandsUp(): Boolean = direction in arrayOf(
-        ExpandDirection.NORTH, ExpandDirection.UP
-    )
+    private fun expandsUp(): Boolean = direction === ExpandDirection.UP
 
     private fun createLabels() {
         val background = TypedValue()
@@ -304,7 +297,8 @@ class FloatingActionButtonMenu @JvmOverloads constructor(
         }
     }
 
-    inner class LayoutParams(source: ViewGroup.LayoutParams) : ViewGroup.LayoutParams(source) {
+
+    inner class LayoutParams(source: ViewGroup.LayoutParams) : MarginLayoutParams(source) {
         private val animatorExpandMenu: ObjectAnimator = ObjectAnimator()
         private val animatorExpandAlpha: ObjectAnimator = ObjectAnimator()
         private val animatorCollapseMenu: ObjectAnimator = ObjectAnimator()
@@ -327,13 +321,12 @@ class FloatingActionButtonMenu @JvmOverloads constructor(
             }
 
             when (direction) {
-                ExpandDirection.NORTH, ExpandDirection.SOUTH,
                 ExpandDirection.UP, ExpandDirection.DOWN -> {
                     animatorCollapseMenu.setProperty(View.TRANSLATION_Y)
                     animatorExpandMenu.setProperty(View.TRANSLATION_Y)
                 }
-                ExpandDirection.EAST, ExpandDirection.WEST,
-                ExpandDirection.RIGHT, ExpandDirection.LEFT -> {
+                ExpandDirection.START, ExpandDirection.LEFT,
+                ExpandDirection.END, ExpandDirection.RIGHT -> {
                     animatorCollapseMenu.setProperty(View.TRANSLATION_X)
                     animatorExpandMenu.setProperty(View.TRANSLATION_X)
                 }

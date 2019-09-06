@@ -29,6 +29,10 @@ class LogMAR @JvmOverloads constructor(
         get() = _exp
     val scale: Float
         get() = defaultSize * TEN.pow(_exp)
+    val minScale: Float
+        get() = defaultSize * TEN.pow(infimum)
+    val maxScale: Float
+        get() = defaultSize * TEN.pow(supremum)
 
     @JvmOverloads
     fun stepUp(multiplier: Int = 1): Float {
