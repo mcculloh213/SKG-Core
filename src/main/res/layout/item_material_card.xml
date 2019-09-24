@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="80dp"
+    android:layout_height="85dp"
+    android:layout_gravity="center"
+    android:padding="@dimen/zero_dp"
+    card:strokeWidth="0dp"
+    card:cardBackgroundColor="#44a1a1a1">
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/layout_padding_large"
+        android:scaleType="fitCenter"
+        tools:tint="?attr/colorSecondary"
+        tools:src="@drawable/ic_camera"/>
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin_small"
+        android:layout_gravity="bottom|center_horizontal"
+        android:gravity="center"
+        android:textAlignment="gravity"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="10sp"
+        android:background="@drawable/bg_card"
+        android:backgroundTint="#77000000"
+        tools:text="Hello!"/>
+</com.google.android.material.card.MaterialCardView>

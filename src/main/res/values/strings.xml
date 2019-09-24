@@ -3,4 +3,5 @@
     <string name="menu_home" translatable="false">Home</string>
     <string name="hf_menu_search" translatable="false">hf_no_number|hf_show_icon|Search</string>
     <string name="hf_menu_home" translatable="false">hf_no_number|hf_show_icon|Home</string>
+    <string name="label_select_menu">Select Menu</string>
 </resources>

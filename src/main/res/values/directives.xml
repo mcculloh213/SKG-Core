@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hf_hide_menu">hf_no_number|Hide Menu</string>
+    <string name="hf_show_menu">hf_no_number|Show Menu</string>
+    <string name="hf_select_menu">hf_no_number|Select Menu</string>
+</resources>

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -52,11 +53,15 @@ dependencies {
     api "com.davemorrissey.labs:subsampling-scale-image-view:3.10.0"
     api "com.google.android.material:material:1.1.0-alpha09"
     api "com.karumi:dexter:5.0.0"
+    api "com.squareup.picasso:picasso:2.71828"
     api 'com.xwray:groupie:2.3.0'
     api 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    api 'com.airbnb:deeplinkdispatch:4.1.0'
+    kapt 'com.airbnb:deeplinkdispatch-processor:4.1.0'
 
     // Kotlin
     implementation "androidx.core:core-ktx:1.0.2"

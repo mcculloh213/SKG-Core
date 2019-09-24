@@ -4,4 +4,5 @@
     <item name="fab_menu_item" type="id" />
     <item name="fab_menu_label" type="id" />
     <item name="metadata_label" type="id" />
+    <item name="collapse_container_toggle" type="id" />
 </resources>
