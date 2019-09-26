@@ -1,7 +1,6 @@
 package ktx.sovereign.core.controller
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -11,7 +10,6 @@ import android.util.Base64
 import android.util.Log
 import ktx.sovereign.core.contract.TextToSpeechContract
 import ktx.sovereign.database.provider.MediaProvider
-import java.io.File
 import java.lang.ref.WeakReference
 
 class TextToSpeechController(activity: Activity) : UtteranceProgressListener(),
