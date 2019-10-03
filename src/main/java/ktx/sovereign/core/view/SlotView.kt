@@ -20,7 +20,7 @@ class SlotView @JvmOverloads constructor(
     companion object {
         @JvmStatic fun zoomFromInt(value: Int): ZoomLevel {
             return ZoomLevel.values().firstOrNull { it.value == value }
-                ?: ZoomLevel.ONE
+                ?: ZoomLevel.ZERO
         }
         @JvmStatic fun zoomNextLevel(current: ZoomLevel): ZoomLevel {
             return ZoomLevel.values().firstOrNull { it.value == (current.value+1) }
@@ -43,6 +43,9 @@ class SlotView @JvmOverloads constructor(
         @JvmField val DEFAULT_MIN_ZOOM: ZoomLevel = ZoomLevel.ZERO
         @JvmField val DEFAULT_MAX_ZOOM: ZoomLevel = ZoomLevel.TEN
     }
+
+    val currentLevel: Int
+        get() = currentZoom.value
 
     private val slots: Int
     private val filledSlot: Drawable

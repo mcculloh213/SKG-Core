@@ -80,6 +80,10 @@ class MediaPlayerHolder(context: Context) : MediaPlayerContract.Adapter, Corouti
             }
         }
     }
+
+    override fun stop() {
+        player?.stop()
+    }
     override fun seekTo(position: Int) {
         player?.let {
             it.seekTo(position)
@@ -88,7 +92,8 @@ class MediaPlayerHolder(context: Context) : MediaPlayerContract.Adapter, Corouti
     }
 
     private fun initialize() {
-        if (player == null) {
+        val p = player
+        if (p == null) {
             player = MediaPlayer().also {
                 it.setOnErrorListener { _, what, extra ->
                     Log.e("MediaPlayer", "What: $what\tExtra: $extra")
@@ -109,6 +114,8 @@ class MediaPlayerHolder(context: Context) : MediaPlayerContract.Adapter, Corouti
                     }
                 }
             }
+        } else {
+            p.reset()
         }
     }
 }

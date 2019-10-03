@@ -15,6 +15,7 @@ interface MediaPlayerContract {
         fun play()
         fun reset()
         fun pause()
+        fun stop()
         fun seekTo(position: Int)
     }
     interface PlaybackInfoListener {
@@ -35,7 +36,7 @@ interface MediaPlayerContract {
         override fun onPositionChanged(position: Int) {
             onPositionChanged?.invoke(position)
         }
-        override fun onStateChanged(state: MediaPlayerContract.State) {
+        override fun onStateChanged(state: State) {
             onStateChanged?.invoke(state)
         }
         override fun onPlaybackCompleted() {

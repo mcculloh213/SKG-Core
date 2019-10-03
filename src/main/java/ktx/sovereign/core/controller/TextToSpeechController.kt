@@ -91,9 +91,20 @@ class TextToSpeechController(activity: Activity) : UtteranceProgressListener(),
     }
     override fun bulkSynthesize(parent: String, text: List<String>, params: Bundle?, utterancePrefix: String) {
         Log.i("TTS", "Max input size: ${TextToSpeech.getMaxSpeechInputLength()}")
+        val chunk = mutableListOf<String>()
+        val builder = StringBuilder()
         activityRef.get()?.let { context ->
             val dir = MediaProvider.getExternalAudioSubdirectory(context, parent)
             text.forEachIndexed { idx, line ->
+                builder.append(line).append(" ")
+                if (idx % 3 == 2) {
+                    chunk.add(builder.toString().trim())
+                    builder.clear()
+                    builder.setLength(0)
+                }
+            }
+            if (builder.isNotEmpty()) { chunk.add(builder.toString().trim()) }
+            chunk.forEachIndexed { idx, line ->
                 val name = "$utterancePrefix$idx-${Base64.encodeToString(line.toByteArray(), Base64.DEFAULT).substringBefore("=").take(6)}"
                 engine?.synthesizeToFile(line, params,
                         MediaProvider.createFile(dir, name, ".wav"), name)
