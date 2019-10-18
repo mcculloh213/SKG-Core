@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin_medium"
+        app:cardElevation="@dimen/layout_elevation_medium"
+        app:cardBackgroundColor="@color/mine_shaft_alpha_80">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_margin_small"
+            android:padding="@dimen/layout_padding_xsmall"
+            android:textAppearance="@style/TextAppearance.Core.Chip"
+            android:textColor="?android:attr/textColorSecondary"
+            tools:text="Label Text"/>
+    </com.google.android.material.card.MaterialCardView>
+</merge>
