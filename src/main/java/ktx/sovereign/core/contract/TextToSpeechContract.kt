@@ -15,7 +15,7 @@ interface TextToSpeechContract {
     object SpeechRate {
         val SLOW: Float = 0.5f
         val DEFAULT: Float = 1.0f
-        val FAST: Float = 2.0f
+        val FAST: Float = 2.5f
     }
     interface Holder {
         fun setStateInfoListener(listener: StateInfoListener)

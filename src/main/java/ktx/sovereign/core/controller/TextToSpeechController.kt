@@ -8,6 +8,7 @@ import android.speech.tts.UtteranceProgressListener
 import android.speech.tts.Voice
 import android.util.Base64
 import android.util.Log
+import androidx.core.math.MathUtils.clamp
 import ktx.sovereign.core.contract.TextToSpeechContract
 import ktx.sovereign.database.provider.MediaProvider
 import java.lang.ref.WeakReference
@@ -78,7 +79,9 @@ class TextToSpeechController(activity: Activity) : UtteranceProgressListener(),
         }
     }
     override fun setPitch(pitch: Float): Int = engine?.setPitch(pitch) ?: TextToSpeech.ERROR
-    override fun setSpeechRate(rate: Float): Int = engine?.setSpeechRate(rate) ?: TextToSpeech.ERROR
+    override fun setSpeechRate(rate: Float): Int = engine?.setSpeechRate(
+            clamp(rate, TextToSpeechContract.SpeechRate.SLOW, TextToSpeechContract.SpeechRate.FAST)
+    ) ?: TextToSpeech.ERROR
     override fun setVoice(voice: Voice): Int = engine?.setVoice(voice) ?: TextToSpeech.ERROR
     override fun speak(text: String, mode: Int, params: Bundle?, utteranceId: String?) {
         engine?.speak(text.trim(), mode, params, utteranceId)

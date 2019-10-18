@@ -15,7 +15,7 @@ class TiltScrollController(
 ) : SensorEventListener {
     companion object {
         @JvmStatic val MOTION_THRESHOLD: Float = 0.001f
-        @JvmStatic val SENSOR_DELAY_MILLISECONDS: Int = 50 * 1000 // := 32 ms
+        @JvmStatic val SENSOR_DELAY_MILLISECONDS: Int = 32 * 1000 // := 32 ms
     }
 
     private val mSensorManager: SensorManager = context.getSystemService(SensorManager::class.java)
@@ -82,23 +82,23 @@ class TiltScrollController(
         when (mWindowManager.defaultDisplay.rotation) {
             Surface.ROTATION_0 -> {
                 xAxis = SensorManager.AXIS_X
-                yAxis = SensorManager.AXIS_Z
+                yAxis = SensorManager.AXIS_Y
             }
             Surface.ROTATION_90 -> {
-                xAxis = SensorManager.AXIS_Z
+                xAxis = SensorManager.AXIS_Y
                 yAxis = SensorManager.AXIS_MINUS_X
             }
             Surface.ROTATION_180 -> {
                 xAxis = SensorManager.AXIS_MINUS_X
-                yAxis = SensorManager.AXIS_MINUS_Z
+                yAxis = SensorManager.AXIS_MINUS_Y
             }
             Surface.ROTATION_270 -> {
-                xAxis = SensorManager.AXIS_MINUS_Z
+                xAxis = SensorManager.AXIS_MINUS_Y
                 yAxis = SensorManager.AXIS_X
             }
             else -> {
                 xAxis = SensorManager.AXIS_X
-                yAxis = SensorManager.AXIS_Z
+                yAxis = SensorManager.AXIS_Y
             }
         }
 

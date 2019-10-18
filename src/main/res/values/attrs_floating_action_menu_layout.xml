@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FloatingActionMenuLayout">
+        <attr name="optionsMenu" format="reference"/>
+        <attr name="optionsColor" format="reference|color"/>
+        <attr name="toggleColor" format="reference|color"/>
+        <attr name="rootBackgroundColor" format="reference|color"/>
+    </declare-styleable>
+</resources>
