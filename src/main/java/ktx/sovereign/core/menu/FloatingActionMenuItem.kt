@@ -42,6 +42,9 @@ class FloatingActionMenuItem @JvmOverloads constructor(
         isTitleEnabled = sequence.isNullOrEmpty().not()
         title.text = sequence
     }
+    override fun setContentDescription(sequence: CharSequence?) {
+        fab_menu_item.contentDescription = sequence
+    }
     fun setColor(color: Int) = Unit // fab_menu_item.setColorFilter(color)
     fun toggle(isVisible: Boolean) {
         val visibility = if (isVisible) View.VISIBLE else View.GONE

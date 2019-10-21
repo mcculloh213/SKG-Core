@@ -3,6 +3,7 @@ package ktx.sovereign.core.menu
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
+import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.MenuInflater
@@ -101,6 +102,9 @@ class FloatingActionOptions @JvmOverloads constructor(
                     setTitle(item.title)
                     setImageDrawable(item.icon)
                     setColor(color)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        contentDescription = item.contentDescription
+                    }
                     menuItem = item
                 }
                 addView(fab)
